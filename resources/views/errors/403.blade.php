@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('title', 'Access Denied')
+@section('code', '403')
+@section('heading', 'You do not have access to this page 🔒')
+@section('message', 'This area is restricted to a different account type. If you believe this is a mistake, please contact support.')

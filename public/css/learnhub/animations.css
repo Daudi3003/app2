@@ -1,0 +1,153 @@
+/* =========================================================================
+   LearnHub — Keyframes & scroll-reveal utilities
+   Animate only `transform` and `opacity` for compositor-friendly motion.
+   ========================================================================= */
+
+@keyframes lh-spin { to { transform: rotate(360deg); } }
+
+@keyframes lh-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes lh-fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lh-fade-down {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lh-slide-right {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes lh-scale-in {
+    from { opacity: 0; transform: scale(.94); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes lh-pop {
+    0%   { transform: scale(1); }
+    45%  { transform: scale(1.32); }
+    100% { transform: scale(1); }
+}
+
+@keyframes lh-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-11px); }
+}
+
+@keyframes lh-shimmer {
+    0%   { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+
+@keyframes lh-toast-in {
+    from { opacity: 0; transform: translateX(28px) scale(.96); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes lh-toast-out {
+    from { opacity: 1; transform: translateX(0) scale(1); }
+    to   { opacity: 0; transform: translateX(28px) scale(.96); }
+}
+
+@keyframes lh-pulse-ring {
+    0%   { transform: scale(.9); opacity: .7; }
+    70%  { transform: scale(1.5); opacity: 0; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes lh-blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(24px, -18px) scale(1.06); }
+    66%      { transform: translate(-18px, 14px) scale(.96); }
+}
+
+/* -------------------------------------------------------------------------
+   Direct-use animation classes
+   ------------------------------------------------------------------------- */
+
+.anim-fade-in   { animation: lh-fade-in   .5s var(--ease-out) both; }
+.anim-fade-up   { animation: lh-fade-up   .55s var(--ease-out) both; }
+.anim-fade-down { animation: lh-fade-down .55s var(--ease-out) both; }
+.anim-scale-in  { animation: lh-scale-in  .45s var(--ease-out) both; }
+.anim-float     { animation: lh-float     6s ease-in-out infinite; }
+
+/* Stagger helpers — apply alongside an .anim-* class */
+.d-1 { animation-delay: .07s; }
+.d-2 { animation-delay: .14s; }
+.d-3 { animation-delay: .21s; }
+.d-4 { animation-delay: .28s; }
+.d-5 { animation-delay: .35s; }
+.d-6 { animation-delay: .42s; }
+.d-7 { animation-delay: .49s; }
+.d-8 { animation-delay: .56s; }
+
+/* -------------------------------------------------------------------------
+   Scroll reveal — JS adds .is-visible via IntersectionObserver.
+   Falls back to visible when JS is off (see the <noscript> rule below).
+   ------------------------------------------------------------------------- */
+
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .65s var(--ease-out), transform .65s var(--ease-out);
+    will-change: opacity, transform;
+}
+[data-reveal='left']  { transform: translateX(-28px); }
+[data-reveal='right'] { transform: translateX(28px); }
+[data-reveal='scale'] { transform: scale(.95); }
+[data-reveal='fade']  { transform: none; }
+
+[data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+}
+
+/* -------------------------------------------------------------------------
+   Hover helpers
+   ------------------------------------------------------------------------- */
+
+.hover-lift { transition: transform var(--t), box-shadow var(--t); }
+.hover-lift:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+.hover-zoom { overflow: hidden; }
+.hover-zoom img, .hover-zoom .zoom-target { transition: transform .55s var(--ease-out); }
+.hover-zoom:hover img, .hover-zoom:hover .zoom-target { transform: scale(1.07); }
+
+.hover-underline { position: relative; }
+.hover-underline::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 100%; height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--t);
+}
+.hover-underline:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* Counter numbers animate via JS; keep them stable in width */
+.counter { font-variant-numeric: tabular-nums; }
+
+/* -------------------------------------------------------------------------
+   Reveal containment
+   `[data-reveal="right"]` sits at translateX(28px) until it scrolls into
+   view, which would otherwise widen the page. `overflow-x: clip` contains
+   it without creating a scroll container, so sticky sidebars inside these
+   sections keep working (unlike `overflow: hidden`).
+   ------------------------------------------------------------------------- */
+.section,
+.page-head,
+.search-band,
+.portal .welcome {
+    overflow-x: clip;
+}

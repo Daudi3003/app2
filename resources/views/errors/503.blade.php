@@ -1,0 +1,5 @@
+@extends('errors.layout')
+@section('title', 'Under Maintenance')
+@section('code', '503')
+@section('heading', 'LearnHub is briefly under maintenance 🚧')
+@section('message', 'We are shipping an improvement and will be back shortly. Thank you for your patience.')

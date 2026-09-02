@@ -1,0 +1,361 @@
+/* =========================================================================
+   LearnHub — Responsive rules
+   Breakpoints: 1280 · 1100 · 1024 · 900 · 768 · 640 · 480 · 380
+   Goal: no horizontal overflow at any width from 320px up.
+   ========================================================================= */
+
+/* ---------- ≤ 1280px : large laptops ---------- */
+@media (max-width: 1280px) {
+    :root { --sidebar-w: 244px; }
+    .navbar__search { width: 190px; }
+    .navbar__search:focus-within { width: 220px; }
+    .course-layout { grid-template-columns: minmax(0, 1fr) 330px; }
+    .learn { grid-template-columns: 300px minmax(0, 1fr); }
+}
+
+/* ---------- ≤ 1100px : small laptops ---------- */
+@media (max-width: 1100px) {
+    .navbar__search { display: none; }
+    .navbar__links { gap: 0; margin-left: var(--sp-2); }
+    .navbar__link { padding-inline: 10px; }
+    .catalog { grid-template-columns: 240px minmax(0, 1fr); gap: var(--sp-6); }
+    .dash-grid { grid-template-columns: minmax(0, 1fr); }
+    .footer__grid { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); row-gap: var(--sp-8); }
+    .footer__newsletter { grid-column: 1 / -1; }
+}
+
+/* ---------- ≤ 1024px : tablets landscape ---------- */
+@media (max-width: 1024px) {
+    /* Public nav collapses to hamburger */
+    .navbar__links, .navbar__actions .btn { display: none; }
+    .navbar__actions .btn--primary { display: inline-flex; }
+    .hamburger { display: flex; }
+
+    /* Dashboard sidebar becomes an off-canvas drawer */
+    .sidebar { transform: translateX(-100%); box-shadow: var(--shadow-lg); }
+    .sidebar.is-open { transform: translateX(0); }
+    .sidebar__close { display: inline-flex; }
+    .portal__main { margin-left: 0; }
+    .topbar__toggle { display: inline-flex; }
+    .topbar__search { display: none; }
+
+    /* Course detail stacks */
+    .course-layout { grid-template-columns: minmax(0, 1fr); margin-top: var(--sp-6); }
+    .course-layout__aside { position: static; order: -1; }
+    .enroll-card { max-width: 520px; }
+
+    .hero__inner { grid-template-columns: minmax(0, 1fr); text-align: center; }
+    .hero__lead { margin-inline: auto; }
+    .hero__actions, .hero__trust { justify-content: center; }
+    .hero__visual { max-width: 520px; margin-inline: auto; width: 100%; }
+    .hero__float--1 { left: -8px; }
+    .hero__float--2 { right: -8px; }
+
+    .about-split { grid-template-columns: minmax(0, 1fr); }
+    .contact-layout { grid-template-columns: minmax(0, 1fr); }
+    .instructor-hero { grid-template-columns: minmax(0, 1fr); text-align: center; justify-items: center; }
+    .instructor-hero__meta { justify-content: center; }
+
+    .settings-layout { grid-template-columns: minmax(0, 1fr); }
+    .settings-nav {
+        position: static;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: var(--sp-2);
+        padding-bottom: var(--sp-2);
+        scrollbar-width: none;
+    }
+    .settings-nav::-webkit-scrollbar { display: none; }
+    .settings-nav button { white-space: nowrap; }
+
+    .learn { grid-template-columns: minmax(0, 1fr); }
+    .learn__aside {
+        position: static;
+        max-height: none;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+        order: 2;
+    }
+    .learn__main { order: 1; }
+
+    .messages { grid-template-columns: minmax(0, 1fr); height: auto; }
+    .messages__list { border-right: 0; border-bottom: 1px solid var(--border); max-height: 300px; }
+    .messages__body { min-height: 340px; }
+}
+
+/* ---------- ≤ 900px ---------- */
+@media (max-width: 900px) {
+    .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stats-band { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-5); }
+    .faq-grid { grid-template-columns: minmax(0, 1fr); }
+    .learn-list { grid-template-columns: minmax(0, 1fr); }
+    .rating-summary { grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); }
+    .courses-grid.is-list .course-card__media { width: 220px; }
+}
+
+/* ---------- ≤ 768px : tablets portrait ---------- */
+@media (max-width: 768px) {
+    :root { --navbar-h: 64px; }
+
+    /* Catalogue filters become a toggleable drawer panel */
+    .catalog { grid-template-columns: minmax(0, 1fr); }
+    .catalog__aside {
+        position: static;
+        display: none;
+    }
+    .catalog__aside.is-open { display: block; animation: lh-fade-down .3s var(--ease-out) both; }
+    .filters-toggle { display: inline-flex; }
+
+    .form-grid, .form-grid--3 { grid-template-columns: minmax(0, 1fr); }
+    .role-picker { grid-template-columns: minmax(0, 1fr); }
+
+    /* Auth: hide the marketing column */
+    .auth { grid-template-columns: minmax(0, 1fr); }
+    .auth__aside { display: none; }
+
+    .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer__about { grid-column: 1 / -1; }
+    .footer__bottom { flex-direction: column; text-align: center; gap: var(--sp-3); }
+    .footer__legal { justify-content: center; }
+
+    .toast-host { top: auto; bottom: var(--sp-4); right: var(--sp-4); left: var(--sp-4); width: auto; }
+
+    .welcome { text-align: center; justify-content: center; }
+    .welcome__body { min-width: 0; }
+    .welcome__art { display: none; }
+    .welcome__actions { justify-content: center; width: 100%; }
+
+    .pane-head { align-items: flex-start; }
+    .pane-head__actions { width: 100%; }
+
+    .profile-head__body { margin-top: -36px; }
+    .profile-head__info, .profile-head__actions { padding-top: 0; }
+    .profile-head__actions { width: 100%; }
+
+    .courses-grid.is-list .course-card { flex-direction: column; }
+    .courses-grid.is-list .course-card__media { width: 100%; aspect-ratio: 16 / 9; }
+
+    .search--hero .search__input { padding: 15px 18px 15px 48px; }
+    .search--hero .search__submit { position: static; width: 100%; margin-top: var(--sp-3); }
+    .search--hero { flex-wrap: wrap; }
+
+    .modal { padding: var(--sp-4); align-items: flex-end; }
+    .modal__dialog { max-height: 88vh; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+    .modal__head, .modal__body { padding-inline: var(--sp-5); }
+    .modal__foot { padding-inline: var(--sp-5); flex-direction: column-reverse; }
+    .modal__foot .btn { width: 100%; }
+
+    .chart { height: 200px; }
+    .stepper { gap: 0; }
+    .step { min-width: 118px; }
+    .step__sub { display: none; }
+}
+
+/* ---------- ≤ 640px : large phones ---------- */
+@media (max-width: 640px) {
+    .container { padding-inline: var(--sp-4); }
+
+    .grid--2, .grid--3, .grid--4, .dash-grid--even, .dash-grid--thirds {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .grid { gap: var(--sp-4); }
+
+    .courses-grid { grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
+    .stats-row { grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
+    .stats-band { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: var(--sp-6) var(--sp-5); }
+
+    .section { padding-block: 44px; }
+
+    .card__head, .card__body, .card__foot { padding-inline: var(--sp-5); }
+    .list__item, .continue-row { padding-inline: var(--sp-5); }
+
+    .hero__float { display: none; }
+    .search-band { margin-top: -30px; }
+
+    .form-actions { flex-direction: column-reverse; align-items: stretch; }
+    .form-actions .btn { width: 100%; }
+    .form-actions > div { display: flex; flex-direction: column; gap: var(--sp-3); width: 100%; }
+
+    .toolbar { flex-direction: column; align-items: stretch; }
+    .toolbar__search { flex: 1 1 auto; }
+    .toolbar .btn, .toolbar .select { width: 100%; }
+
+    .tabs { margin-inline: calc(-1 * var(--sp-4)); padding-inline: var(--sp-4); }
+
+    .instructor-card__stats { gap: var(--sp-4); }
+    .table { min-width: 600px; }
+    .lesson-nav .btn { flex: 1; }
+    .dropdown__menu { min-width: 216px; }
+}
+
+/* ---------- ≤ 480px : phones ---------- */
+@media (max-width: 480px) {
+    :root {
+        --fs-base: 0.9375rem;
+        --sidebar-w: 268px;
+    }
+
+    .container { padding-inline: var(--sp-4); }
+
+    .brand { font-size: 1.12rem; }
+    .brand__mark { width: 34px; height: 34px; border-radius: 10px; }
+    .brand__mark svg { width: 19px; height: 19px; }
+
+    .navbar__inner { gap: var(--sp-3); padding-inline: var(--sp-4); }
+    .navbar__actions .btn { padding: 9px 15px; font-size: var(--fs-sm); }
+
+    .hero__actions { flex-direction: column; }
+    .hero__actions .btn { width: 100%; }
+    .cta__actions { flex-direction: column; }
+    .cta__actions .btn { width: 100%; }
+    .error-page__actions { flex-direction: column; width: 100%; max-width: 300px; }
+    .error-page__actions .btn { width: 100%; }
+
+    .stats-band { grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); }
+
+    .stat-card { padding: var(--sp-4); gap: var(--sp-3); }
+    .stat-card__icon { width: 42px; height: 42px; font-size: 1.2rem; }
+    .stat-card__value { font-size: var(--fs-xl); }
+
+    .portal__content { padding: var(--sp-4); }
+    .topbar { padding-inline: var(--sp-4); gap: var(--sp-3); }
+    .topbar__title p { display: none; }
+    .topbar__title h1 { font-size: var(--fs-lg); }
+
+    .card__head { flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
+    .card__head, .card__body, .card__foot { padding-inline: var(--sp-4); }
+    .list__item, .continue-row { padding-inline: var(--sp-4); gap: var(--sp-3); }
+    .continue-row { flex-wrap: wrap; }
+    .continue-row__end { width: 100%; }
+    .continue-row__end .btn { width: 100%; }
+
+    .welcome { padding: var(--sp-5); }
+    .welcome__actions { flex-direction: column; }
+    .welcome__actions .btn { width: 100%; }
+
+    .pane-head__actions { flex-direction: column; }
+    .pane-head__actions .btn { width: 100%; }
+
+    .auth__main { padding: var(--sp-6) var(--sp-4); }
+    .auth__card > .brand { margin-bottom: var(--sp-6); }
+
+    .learn__main { padding: var(--sp-4); }
+    .lesson-nav { flex-direction: column-reverse; }
+    .lesson-nav .btn { width: 100%; }
+    .player__btn { width: 62px; height: 62px; }
+
+    .messages__body { padding: var(--sp-4); }
+    .bubble { max-width: 88%; }
+
+    .rating-summary__score strong { font-size: 2.5rem; }
+    .enroll-card__price strong { font-size: 1.85rem; }
+
+    .grid--auto, .grid--auto-sm, .grid--auto-lg { grid-template-columns: minmax(0, 1fr); }
+    .chart { height: 180px; gap: 4px; }
+    .chart__label { font-size: 10px; }
+
+    .pagination__link { min-width: 36px; height: 36px; padding: 0 9px; }
+    .stepper { margin-inline: calc(-1 * var(--sp-4)); padding-inline: var(--sp-4); }
+    .step { min-width: 104px; }
+    .step__num { width: 32px; height: 32px; }
+    .step__line { margin-top: 15px; }
+    .step__label { font-size: var(--fs-xs); }
+
+    .modal__body { padding: var(--sp-5) var(--sp-4); }
+    .table { min-width: 540px; }
+    .certificate { padding: var(--sp-5); }
+}
+
+/* ---------- ≤ 380px : small phones (iPhone SE / 320px) ---------- */
+@media (max-width: 380px) {
+    :root { --sp-6: 18px; }
+    .container { padding-inline: var(--sp-3); }
+    .brand__text { font-size: 1.02rem; }
+    .navbar__actions .btn { padding: 8px 12px; }
+    .footer__grid { grid-template-columns: minmax(0, 1fr); }
+    .footer__newsletter form { flex-direction: column; }
+    .footer__newsletter .btn { width: 100%; }
+    .instructor-card__stats { flex-direction: column; gap: var(--sp-3); }
+    .course-card__foot { flex-direction: column; align-items: stretch; gap: var(--sp-3); }
+    .course-card__foot .btn { width: 100%; }
+    .toast-host { left: var(--sp-3); right: var(--sp-3); bottom: var(--sp-3); }
+    .avatar--2xl { width: 96px; height: 96px; font-size: var(--fs-2xl); }
+}
+
+/* ---------- Landscape phones: keep drawers scrollable ---------- */
+@media (max-height: 480px) and (orientation: landscape) {
+    .sidebar__scroll, .mobile-nav { overflow-y: auto; }
+    .modal__dialog { max-height: 94vh; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+    .navbar, .sidebar, .topbar, .footer, .mobile-nav,
+    .toast-host, .overlay, .pane-head__actions, .btn { display: none !important; }
+    .portal__main { margin-left: 0; }
+    body { background: #fff; }
+    .card, .stat-card { box-shadow: none; border-color: #ddd; break-inside: avoid; }
+}
+
+/* =========================================================================
+   Narrow-screen overflow fixes
+   Verified against 1920 / 1440 / 1366 / 1280 / 1024 / 768 / 480 / 430 /
+   414 / 390 / 375 / 320 px in headless Chrome.
+   ========================================================================= */
+
+@media (max-width: 900px) {
+    /* The lesson player top bar drops its inline progress meter and course
+       title; the same information is repeated in the curriculum sidebar. */
+    .learn-topbar-progress { display: none; }
+}
+
+@media (max-width: 640px) {
+    /* A twelve-month chart cannot fit a phone: let it scroll inside the card
+       rather than widening the page. */
+    .chart {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+    .chart__col { min-width: 26px; }
+
+    /* Long single-word values (emails, file names, codes) must break. */
+    .table__user-sub,
+    .list__sub,
+    .file-row__name,
+    .certificate__id,
+    .contact-info__value { overflow-wrap: anywhere; }
+}
+
+@media (max-width: 480px) {
+    .chart__col { min-width: 22px; }
+    .hbar__head { flex-wrap: wrap; }
+    .hbar__value { font-size: var(--fs-xs); }
+
+    /* Section heads and pane heads stack rather than compete for width. */
+    .card__head { row-gap: var(--sp-2); }
+    .rating-summary__score { text-align: left; }
+}
+
+/* One-line clamp helper used by the lesson player bar. */
+.t-clamp-1 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+    /* Below this width the lesson bar keeps only the brand and Exit button. */
+    .hide-xs { display: none !important; }
+}
+
+@media (max-width: 480px) {
+    /* Dense list rows wrap their trailing actions onto a second line
+       instead of pushing the row wider than the screen. */
+    .list__item { flex-wrap: wrap; }
+    .list__end { margin-left: 0; width: 100%; justify-content: flex-end; }
+    .list__item > .list__body { flex: 1 1 100%; }
+}
